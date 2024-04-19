@@ -9,7 +9,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
 
     }
 
-    // Approach 1
+    // Approach 1 (faster)
     public int lengthOfLongestSubstring1(String s) {
         if (s.isEmpty())
             return 0;
@@ -26,6 +26,22 @@ public class LongestSubstringWithoutRepeatingCharacters {
             }
             set.add(c);
             max = Math.max(max, set.size());
+        }
+        return max;
+    }
+
+    // Approach 2 (slower)
+    public int lengthOfLongestSubstring2(String s) {
+        int max = 0;
+        for (int i = 0; i < s.length(); i++) {
+            StringBuilder currentSubstring = new StringBuilder();
+            for (int j = i; j < s.length(); j++) {
+                if(currentSubstring.indexOf(String.valueOf(s.charAt(j)))!=-1){
+                    break;
+                }
+                currentSubstring.append(s.charAt(j));
+                max = Math.max(currentSubstring.length(),max);
+            }
         }
         return max;
     }
